@@ -1,0 +1,96 @@
+{
+  "slug": "access-review",
+  "title": "权限复核决策与整改状态预检",
+  "fields": [
+    {
+      "key": "review_no",
+      "label": "复核编号",
+      "type": "ID",
+      "length": 200
+    },
+    {
+      "key": "account",
+      "label": "账号",
+      "type": "ID",
+      "length": 200
+    },
+    {
+      "key": "reviewer",
+      "label": "复核人",
+      "type": "ID",
+      "length": 200
+    },
+    {
+      "key": "decision",
+      "label": "复核结论",
+      "type": "ENUM",
+      "length": 200,
+      "options": [
+        "KEEP",
+        "REVOKE"
+      ]
+    },
+    {
+      "key": "remediation",
+      "label": "整改状态",
+      "type": "ENUM",
+      "length": 200,
+      "options": [
+        "PENDING",
+        "DONE",
+        "NOT_REQUIRED"
+      ]
+    },
+    {
+      "key": "status",
+      "label": "状态",
+      "type": "ENUM",
+      "length": 200,
+      "options": [
+        "OPEN",
+        "CLOSED"
+      ]
+    }
+  ],
+  "unique": [
+    [
+      "review_no"
+    ]
+  ],
+  "rules": [
+    {
+      "op": "DIFFERENT",
+      "args": [
+        "account",
+        "reviewer"
+      ],
+      "code": "SELF_ACCESS_REVIEW",
+      "message": "被复核账号不得复核自己",
+      "bad": {
+        "reviewer": "USER-01"
+      }
+    },
+    {
+      "op": "IF_EQ",
+      "args": [
+        "status",
+        "CLOSED",
+        "remediation",
+        "DONE"
+      ],
+      "code": "REVIEW_CLOSURE",
+      "message": "本模板关闭复核要求整改完成",
+      "bad": {
+        "remediation": "PENDING"
+      }
+    }
+  ],
+  "sampleCsv": "review_no,account,reviewer,decision,remediation,status\nAR-001,USER-01,USER-02,REVOKE,DONE,CLOSED\n",
+  "limits": {
+    "rows": 500,
+    "bytes": 262144,
+    "columns": 32,
+    "cellCharacters": 4000
+  },
+  "scope": "Read-only batch validation; no persistence, reference-master lookup or full production certification."
+}
