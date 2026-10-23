@@ -1,0 +1,58 @@
+[
+  {
+    "patch": {},
+    "expected": {
+      "decision": "PASS",
+      "reviewGap": "#0",
+      "revocationGap": "#0"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "revokedVerified": "9"
+    },
+    "expected": {
+      "decision": "HOLD"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "reviewed": "99"
+    },
+    "expected": {
+      "decision": "REVIEW"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "reviewed": "99",
+      "dueDate": "2026-10-22"
+    },
+    "expected": {
+      "decision": "HOLD"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "revokeRequired": "101"
+    },
+    "expected": {},
+    "error": true
+  },
+  {
+    "patch": {
+      "inScope": "0",
+      "reviewed": "0",
+      "revokeRequired": "0",
+      "revokedVerified": "0"
+    },
+    "expected": {
+      "decision": "REVIEW"
+    },
+    "error": false
+  }
+]

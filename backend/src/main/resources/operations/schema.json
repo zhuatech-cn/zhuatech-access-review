@@ -1,0 +1,85 @@
+{
+  "slug": "access-review",
+  "title": "权限复核范围与回收证据缺口",
+  "fields": [
+    {
+      "key": "id",
+      "label": "记录编号",
+      "type": "ID"
+    },
+    {
+      "key": "inScope",
+      "label": "范围内权限项",
+      "type": "NUMBER",
+      "scale": 0,
+      "min": "0",
+      "max": "1000000"
+    },
+    {
+      "key": "reviewed",
+      "label": "已复核项",
+      "type": "NUMBER",
+      "scale": 0,
+      "min": "0",
+      "max": "1000000"
+    },
+    {
+      "key": "revokeRequired",
+      "label": "要求回收项",
+      "type": "NUMBER",
+      "scale": 0,
+      "min": "0",
+      "max": "1000000"
+    },
+    {
+      "key": "revokedVerified",
+      "label": "已验证回收项",
+      "type": "NUMBER",
+      "scale": 0,
+      "min": "0",
+      "max": "1000000"
+    },
+    {
+      "key": "dueDate",
+      "label": "复核截止",
+      "type": "DATE"
+    }
+  ],
+  "columns": [
+    {
+      "key": "reviewGap",
+      "label": "待复核项"
+    },
+    {
+      "key": "revocationGap",
+      "label": "待验证回收项"
+    },
+    {
+      "key": "reviewedPct",
+      "label": "复核覆盖%"
+    },
+    {
+      "key": "daysToDeadline",
+      "label": "截止剩余天数"
+    }
+  ],
+  "description": "核对纳入复核、已完成复核、要求撤权及确认回收数量，特别标出虽已复核但未完成回收的权限。",
+  "owner": "上海如静知华信息科技有限公司",
+  "website": "https://www.zhuatech.cn/",
+  "authorization": "商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。",
+  "version": 1,
+  "notes": "输入均须为已获授权的同口径数据。金额固定人民币元；比例为百分数。核算结果只用于复核，未审批、未写库、未发起外部调用，也未触发付款、签名、资料销毁或设备控制。建议不构成法律、安全、会计或碳核证结论。",
+  "sample": {
+    "asOf": "2026-10-23",
+    "records": [
+      {
+        "id": "ITEM-001",
+        "inScope": "100",
+        "reviewed": "100",
+        "revokeRequired": "10",
+        "revokedVerified": "10",
+        "dueDate": "2026-11-01"
+      }
+    ]
+  }
+}
